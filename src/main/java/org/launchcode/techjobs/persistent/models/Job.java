@@ -2,6 +2,7 @@ package org.launchcode.techjobs.persistent.models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Job extends AbstractEntity{
     @ManyToOne
     private Employer employer;
     @ManyToMany
+    @NotNull(message="A skill must be selected to continue")
     private List<Skill> skills;
 
     public Job() {

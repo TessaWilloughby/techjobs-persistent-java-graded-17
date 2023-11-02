@@ -37,7 +37,7 @@ public class HomeController {
 
         model.addAttribute("title", "MyJobs");
 
-        List jobs = (List<Job>) jobRepository.findAll();
+        List<Job> jobs = (List<Job>) jobRepository.findAll();
         model.addAttribute("jobs", jobs);
         return "index";
     }
@@ -48,7 +48,8 @@ public class HomeController {
         model.addAttribute(new Job());
         model.addAttribute("employers", employerRepository.findAll());
 
-        List skills = (List<Skill>) skillRepository.findAll();
+        List<Skill> skills = (List<Skill>) skillRepository.findAll();
+        model.addAttribute("skills", skills);
         return "add";
     }
 
@@ -62,9 +63,9 @@ public class HomeController {
             return "add";
         }
 
-        Optional<Employer> result = employerRepository.findById(employerId);
-        if (result.isPresent()) {
-            Employer employer = result.get();
+        Optional<Employer> optEmployer = employerRepository.findById(employerId);
+        if (optEmployer.isPresent()) {
+            Employer employer = optEmployer.get();
             newJob.setEmployer(employer);
         }
 
